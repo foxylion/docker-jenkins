@@ -5,6 +5,8 @@ Jenkins inside Docker, running in Vagrant VM. Only Docker installed on Host, pro
 
 - First step with Jenkins pipelines. Includes steps, stages, stash, docker
  - https://dzone.com/refcardz/continuous-delivery-with-jenkins-workflow
+- Overview on Jenkins pipeline, including links to documentation, etc.
+ - https://wilsonmar.github.io/jenkins2-pipeline/
 
 ## Setup the Cloud provider
 
