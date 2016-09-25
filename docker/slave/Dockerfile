@@ -8,10 +8,23 @@ RUN apt-get update && apt-get install -y docker-engine
 
 RUN apt-get update && apt-get install -y openjdk-8-jre
 
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update && apt-get install -y curl python python-pip
+RUN pip install jenkins-webapi
 
-RUN useradd -d /home/jenkins jenkins
 RUN mkdir -p /home/jenkins
-RUN chown jenkins . /home/jenkins
+RUN mkdir -p /var/lib/jenkins
+
+ADD slave.py /var/lib/jenkins/slave.py
 
 WORKDIR /home/jenkins
+
+ENV JENKINS_URL "http://jenkins"
+ENV JENKINS_USER "admin"
+ENV JENKINS_PASS "admin"
+ENV SLAVE_NAME ""
+ENV SLAVE_SECRET ""
+ENV SLAVE_EXECUTORS "1"
+ENV SLAVE_LABELS "docker"
+ENV CLEAN_WORKING_DIR "true"
+
+CMD [ "python", "/var/lib/jenkins/slave.py" ]

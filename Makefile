@@ -1,12 +1,25 @@
 
 SHELL:=/bin/bash
 
-up:
-	cd docker/master && docker build -t my-jenkins .
-	cd docker/slave && docker build -t my-jenkins-slave .
-	docker run -d --restart=always --name jenkins -p 80:8080 -p 50000:50000 \
-						 -v /vagrant/jenkins_home:/var/jenkins_home \
-						 my-jenkins
+build: build-master build-slave
 
-clean:
-	docker rm -f jenkins
+build-master:
+	cd docker/master && docker build -t foxylion/jenkins .
+
+build-slave:
+	cd docker/slave && docker build -t foxylion/jenkins-slave .
+
+run-master:
+	docker run -d --restart=always --name jenkins \
+	           -p 80:8080 -p 50000:50000 \
+	           -v /vagrant/jenkins_home:/var/jenkins_home \
+	           foxylion/jenkins
+
+run-slave:
+	docker run -d --restart=always --name jenkins-slave \
+	           -v /home/jenkins:/home/jenkins \
+	           -v /var/run/docker.sock:/var/run/docker.sock \
+	           -e JENKINS_URL http://10.111.0.10 \
+	           foxylion/jenkins-slave
+
+vagrant: build run-master run-slave
