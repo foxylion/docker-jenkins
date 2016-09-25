@@ -1,4 +1,4 @@
-FROM jenkinsci/jenkins:2.22
+FROM jenkinsci/jenkins:2.23
 
 # Install Docker inside the Jenkins image
 USER root
