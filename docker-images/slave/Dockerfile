@@ -6,9 +6,7 @@ RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 581
 RUN echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" > /etc/apt/sources.list.d/docker.list
 RUN apt-get update && apt-get install -y docker-engine
 
-RUN apt-get update && apt-get install -y openjdk-8-jre
-
-RUN apt-get update && apt-get install -y curl python python-pip
+RUN apt-get update && apt-get install -y openjdk-8-jre curl python python-pip git
 RUN pip install jenkins-webapi
 
 RUN mkdir -p /home/jenkins
