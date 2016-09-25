@@ -4,10 +4,10 @@ SHELL:=/bin/bash
 build: build-master build-slave
 
 build-master:
-	cd docker/master && docker build -t foxylion/jenkins .
+	cd docker-images/master && docker build -t foxylion/jenkins .
 
 build-slave:
-	cd docker/slave && docker build -t foxylion/jenkins-slave .
+	cd docker-images/slave && docker build -t foxylion/jenkins-slave .
 
 run-master:
 	docker run -d --restart=always --name jenkins \
