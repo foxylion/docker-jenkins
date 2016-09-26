@@ -24,6 +24,8 @@ The Jenkins master image provides a preconfigured version of Jenkins 2 with all
 required plugins to run Docker based builds in a Pipeline. It also brings the new
 Blueocean pipeline view.
 
+You can find the latest image on [Docker Hub](https://hub.docker.com/r/foxylion/jenkins/).
+
 A Jenkins master should expose the HTTP port and the slave communication port.
 
 ```bash
@@ -47,6 +49,8 @@ supports authentication using credentials or the JNLP slave secret. It is also
 possible to create a slave nodes automatically when the slave container is
 started, the slave node will then automatically removed when the container is
 stopped.
+
+You can find the latest image on [Docker Hub](https://hub.docker.com/r/foxylion/jenkins-slave/).
 
 ```bash
 docker run -d \
