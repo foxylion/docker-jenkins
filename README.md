@@ -2,7 +2,7 @@
 
 This project aims to build a pre-configured Docker image for Jenkins 2.
 
-![Jenkins+Docker Logo](https://github.com/foxylion/docker-jenkins/blob/master/documentation/logo.png)
+![Jenkins+Docker Logo](https://raw.githubusercontent.com/foxylion/docker-jenkins/master/documentation/logo.png)
 
 The image provides all required plugins to run a fully Docker enabled Jenkins
 with multiple docker based slaves and support for the Docker Pipeline plugin.
