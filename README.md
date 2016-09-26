@@ -20,11 +20,11 @@ Jenkins slave.
 
 ### Jenkins Master [![Docker Stars](https://img.shields.io/docker/stars/foxylion/jenkins.svg?style=flat-square)](https://hub.docker.com/r/foxylion/jenkins/) [![Docker Pulls](https://img.shields.io/docker/pulls/foxylion/jenkins.svg?style=flat-square)](https://hub.docker.com/r/foxylion/jenkins/)
 
+***The latest image can be found on [Docker Hub](https://hub.docker.com/r/foxylion/jenkins/).***
+
 The Jenkins master image provides a preconfigured version of Jenkins 2 with all
 required plugins to run Docker based builds in a Pipeline. It also brings the new
 Blueocean pipeline view.
-
-You can find the latest image on [Docker Hub](https://hub.docker.com/r/foxylion/jenkins/).
 
 A Jenkins master should expose the HTTP port and the slave communication port.
 
@@ -44,13 +44,13 @@ the host file system but may result in data loss when the container is removed.
 
 ### Jenkins Slave [![Docker Stars](https://img.shields.io/docker/stars/foxylion/jenkins-slave.svg?style=flat-square)](https://hub.docker.com/r/foxylion/jenkins-slave/) [![Docker Pulls](https://img.shields.io/docker/pulls/foxylion/jenkins-slave.svg?style=flat-square)](https://hub.docker.com/r/foxylion/jenkins-slave/)
 
+***The latest image can be found on [Docker Hub](https://hub.docker.com/r/foxylion/jenkins-slave/).***
+
 The Jenkins slave image provides a configurable version of the Jenkins slave. It
 supports authentication using credentials or the JNLP slave secret. It is also
 possible to create a slave nodes automatically when the slave container is
 started, the slave node will then automatically removed when the container is
 stopped.
-
-You can find the latest image on [Docker Hub](https://hub.docker.com/r/foxylion/jenkins-slave/).
 
 ```bash
 docker run -d \
