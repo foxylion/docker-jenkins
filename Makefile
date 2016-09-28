@@ -19,7 +19,7 @@ run-slave:
 	docker run -d --restart=always --name jenkins-slave \
 	           -v /home/jenkins:/home/jenkins \
 	           -v /var/run/docker.sock:/var/run/docker.sock \
-	           -e JENKINS_URL http://10.111.0.10 \
+	           -e JENKINS_URL=http://10.111.0.10 \
 	           foxylion/jenkins-slave
 
 vagrant: build run-master run-slave
