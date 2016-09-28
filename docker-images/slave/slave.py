@@ -35,7 +35,7 @@ def slave_download(target):
 
 def slave_run(slave_jar, jnlp_url):
     params = [ 'java', '-jar', slave_jar, '-jnlpUrl', jnlp_url ]
-    if os.environ['JENKINS_SLAVE_ADDRESS']:
+    if os.environ['JENKINS_SLAVE_ADDRESS'] != '':
         params.extend([ '-connectTo', os.environ['JENKINS_SLAVE_ADDRESS' ] ])
 
     if os.environ['SLAVE_SECRET'] == '':
@@ -70,6 +70,6 @@ print 'Started Jenkins slave with name "' + slave_name + '" and labels [' + os.e
 process.wait()
 
 print 'Jenkins slave stopped.'
-if os.environ['SLAVE_NAME'] == 'true':
+if os.environ['SLAVE_NAME'] == '':
     slave_delete(slave_name)
     print 'Removed temporary Jenkins slave.'
