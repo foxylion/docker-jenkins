@@ -68,6 +68,7 @@ There are some environment variables to customize the slave behavior.
 | ENV var | Description | Default |
 | ------- | ----------- | ------- |
 | `JENKINS_URL` | The URL where your Jenkins can be reached via HTTP. | `http://jenkins` |
+| `JENKINS_SLAVE_ADDRESS` | An alternative address used to connect to the Jenkins server when starting the TCP connection, it will override the address provided by the Jenkins master. | `-` |
 | `JENKINS_USER` | The user used for authentication against Jenkins master. | `admin` |
 | `JENKINS_PASS` | The password used for authentication against Jenkins master. | `admin` |
 | `SLAVE_NAME` | The name of the Jenkins node (must match a existing node). When left empty, the slave name will be generated. | `-` |
