@@ -67,13 +67,14 @@ There are some environment variables to customize the slave behavior.
 
 | ENV var | Description | Default |
 | ------- | ----------- | ------- |
-| `JENKINS_URL` | The URL where your Jenkins can be reached via HTTP | `http://jenkins` |
-| `JENKINS_USER` | The user used for authentication against Jenkins master | `admin` |
-| `JENKINS_PASS` | The password used for authentication against Jenkins master | `admin` |
+| `JENKINS_URL` | The URL where your Jenkins can be reached via HTTP. | `http://jenkins` |
+| `JENKINS_USER` | The user used for authentication against Jenkins master. | `admin` |
+| `JENKINS_PASS` | The password used for authentication against Jenkins master. | `admin` |
 | `SLAVE_NAME` | The name of the Jenkins node (must match a existing node). When left empty, the slave name will be generated. | `-` |
 | `SLAVE_SECRET` | Will use the provided JNLP secret instead of user/password authentication. | `-` |
-| `SLAVE_EXECUTORS` | Defines how many executors the slave should provide | `1` |
-| `SLAVE_LABELS`| Defines which labels the slave should have. Separete them using a space | `docker` |
+| `SLAVE_EXECUTORS` | Defines how many executors the slave should provide. | `1` |
+| `SLAVE_LABELS`| Defines which labels the slave should have. Separete them using a space. | `docker` |
+| `SLAVE_WORING_DIR`| Define a custom working directory when it is not possible to use `-w` at `docker run` command. | `-` |
 | `CLEAN_WORKING_DIR` | When set to `true` the slave will clean the working directory on startup. This can help to prevent failed builds due to stored configuration in the working directory. | `true` |
 
 #### Temporary Slaves

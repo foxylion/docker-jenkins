@@ -49,6 +49,9 @@ signal.signal(signal.SIGTERM, signal_handler)
 slave_download(slave_jar)
 print 'Downloaded Jenkins slave jar.'
 
+if os.environ['SLAVE_WORING_DIR']:
+    os.setcwd(os.environ['SLAVE_WORING_DIR'])
+
 if os.environ['CLEAN_WORKING_DIR'] == 'true':
     clean_dir(os.getcwd())
     print "Cleaned up working directory."
