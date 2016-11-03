@@ -37,6 +37,7 @@ docker run -d --name jenkins -p 80:8080 -p 50000:50000 \
 - This will start a new Jenkins master
 - It will listen on Port 80 for any HTTP requests
 - Authentication is only possible using credentials (default: admin/admin)
+- Changing is password is only possible by using the `JENKINS_PASS` environment variable
 - All configuration will be saved into `/var/lib/jenkins`
 
 Removing the `-v` will prevent the Docker container from writing anything to
