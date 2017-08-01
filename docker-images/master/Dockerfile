@@ -1,4 +1,4 @@
-FROM jenkinsci/jenkins:latest
+FROM jenkins/jenkins:latest
 
 RUN /usr/local/bin/install-plugins.sh git matrix-auth workflow-aggregator docker-workflow blueocean credentials-binding
 
