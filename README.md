@@ -1,22 +1,16 @@
-# docker-jenkins
+# [docker-jenkins](https://github.com/foxylion/docker-jenkins#the-docker-images)
 
-This project aims to build a pre-configured Docker image for Jenkins 2.
+This project aims to build a pre-configured Docker image for Jenkins 2. [Here you can find the manual.](https://github.com/foxylion/docker-jenkins#the-docker-images)
 
 ![Jenkins+Docker Logo](https://raw.githubusercontent.com/foxylion/docker-jenkins/master/documentation/logo.png)
 
 The image provides all required plugins to run a fully Docker enabled Jenkins
 with multiple docker based slaves and support for the Docker Pipeline plugin.
 
-## Quickstart
-
-If you want start testing the Jenkins directly. Just ensure you've
-[Vagrant](https://www.vagrantup.com) installed, clone the repository and
-call `vagrant up`. Now you can access your Jenkins on http://10.111.0.10/.
-
 ## The Docker Images
 
-There are two Docker images on Docker Hub, one is the Jenkins master and one the
-Jenkins slave.
+There are three Docker images on Docker Hub, one is the Jenkins master and the
+other two to configure a Jenkins slave in different modes (JNLP vs. SSH).
 
 ### Jenkins Master [![Docker Stars](https://img.shields.io/docker/stars/foxylion/jenkins.svg?style=flat-square)](https://hub.docker.com/r/foxylion/jenkins/) [![Docker Pulls](https://img.shields.io/docker/pulls/foxylion/jenkins.svg?style=flat-square)](https://hub.docker.com/r/foxylion/jenkins/)
 
