@@ -43,18 +43,58 @@ docker run -d --name jenkins -p 80:8080 -p 50000:50000 \
 Removing the `-v` will prevent the Docker container from writing anything to
 the host file system but may result in data loss when the container is removed.
 
-### Jenkins Slave [![Docker Stars](https://img.shields.io/docker/stars/foxylion/jenkins-slave.svg?style=flat-square)](https://hub.docker.com/r/foxylion/jenkins-slave/) [![Docker Pulls](https://img.shields.io/docker/pulls/foxylion/jenkins-slave.svg?style=flat-square)](https://hub.docker.com/r/foxylion/jenkins-slave/)
+### Jenkins SSH Slave [![Docker Stars](https://img.shields.io/docker/stars/foxylion/jenkins-ssh-slave.svg?style=flat-square)](https://hub.docker.com/r/foxylion/jenkins-ssh-slave/) [![Docker Pulls](https://img.shields.io/docker/pulls/foxylion/jenkins-ssh-slave.svg?style=flat-square)](https://hub.docker.com/r/foxylion/jenkins-ssh-slave/)
+
+***The latest image can be found on [Docker Hub](https://hub.docker.com/r/foxylion/jenkins-ssh-slave/).***
+
+The Jenkins JNLP slave image is a lightweight solution to run a Jenkins slave with
+zero dependencies on any Docker enabled server.
+The idea behind this image is to run a container on your docker host which is
+exposing a ssh server where the Jenkins master is able to connect to.
+The image is configurable so that you can provide a SSH key which should be
+trusted. It is also possible to rely on password authentication.
+
+```
+docker run -d --name jenkins-slave --restart=unless-stopped \
+           -p 2222:22 \
+           -v /home/jenkins:/home/jenkins \
+           -v /var/run/docker.sock:/var/run/docker.sock \
+           -e SSH_KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC6CPOQDrq...faMvvidd+RVSfDBgJE1g3 jenkins@jenkins.company.tld" \
+           foxylion/jenkins-ssh-slave
+```
+
+Now it is possible to configure a new node on your Jenkins master. Note that you
+must configure some things for the new ssh slave node.
+
+- Use a custom port (in this example port 2222). You can configure this
+  in the "Advanced..." options on the node configuration page.
+- The user Jenkins must use to authenticate against the slave is `root`.
+- The working directory is `/home/jenkins`.
+- You must select the "Manual trusted key Verification Strategy" and check
+  "Require manual verification of initial connection". Otherwise you wouldn't be
+  able to connect the master to the slave.
+- You can compare the provided fingerprint to the fingerprint of your slave.
+  (Get it using `docker logs jenkins-slave`).
+
+There are some environment variables to customize the slave behavior.
+
+| ENV var | Description | Default |
+| ------- | ----------- | ------- |
+| `SSH_PASSWORD` | This is used to configure password authentication. | `jenkins` |
+| `SSH_KEY` | If this option is configured only authentication with this key is possible. | `-` |
+
+### Jenkins JNLP Slave [![Docker Stars](https://img.shields.io/docker/stars/foxylion/jenkins-slave.svg?style=flat-square)](https://hub.docker.com/r/foxylion/jenkins-slave/) [![Docker Pulls](https://img.shields.io/docker/pulls/foxylion/jenkins-slave.svg?style=flat-square)](https://hub.docker.com/r/foxylion/jenkins-slave/)
 
 ***The latest image can be found on [Docker Hub](https://hub.docker.com/r/foxylion/jenkins-slave/).***
 
-The Jenkins slave image provides a configurable version of the Jenkins slave. It
+The Jenkins JNLP slave image provides a configurable version of the Jenkins slave. It
 supports authentication using credentials or the JNLP slave secret. It is also
 possible to create a slave nodes automatically when the slave container is
 started, the slave node will then automatically removed when the container is
 stopped.
 
 ```bash
-docker run -d \
+docker run -d --name jenkins-slave --restart=unless-stopped \
            -v /home/jenkins:/home/jenkins \
            -v /var/run/docker.sock:/var/run/docker.sock
            -e JENKINS_URL=https://jenkins.mycompany.com
@@ -63,6 +103,10 @@ docker run -d \
 
 By default the slave will automatically create a temporary Jenkins node. The name
 will consist of the prefix `docker-slave` and the container hostname.
+
+**Note: Using a JNLP slave does not provide any encryption when communicating
+with the master. In an untrusted network this is not recommended. Use instead
+the ssh slave image.**
 
 There are some environment variables to customize the slave behavior.
 
