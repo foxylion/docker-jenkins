@@ -90,8 +90,8 @@ stopped.
 ```bash
 docker run -d --name jenkins-slave --restart=unless-stopped \
            -v /home/jenkins:/home/jenkins \
-           -v /var/run/docker.sock:/var/run/docker.sock
-           -e JENKINS_URL=https://jenkins.mycompany.com
+           -v /var/run/docker.sock:/var/run/docker.sock \
+           -e JENKINS_URL=https://jenkins.mycompany.com \
            foxylion/jenkins-slave
 ```
 
@@ -133,9 +133,9 @@ Running a slave without automatically creating a Jenkins node, but using JNLP sl
 ```bash
 docker run -d \
            -v /home/jenkins:/home/jenkins \
-           -v /var/run/docker.sock:/var/run/docker.sock
-           -e JENKINS_URL=http://jenkins.mycompany.com
-           -e SLAVE_NAME=docker-slave-028
+           -v /var/run/docker.sock:/var/run/docker.sock \
+           -e JENKINS_URL=http://jenkins.mycompany.com \
+           -e SLAVE_NAME=docker-slave-028 \
            foxylion/jenkins-slave
 ```
 
@@ -154,8 +154,8 @@ information when starting the Docker container.
 docker run -d \
            -w /tmp/jenkins-slave
            -v /tmp/jenkins-slave:/tmp/jenkins-slave \
-           -v /var/run/docker.sock:/var/run/docker.sock
-           -e JENKINS_URL=http://jenkins.mycompany.com
+           -v /var/run/docker.sock:/var/run/docker.sock \
+           -e JENKINS_URL=http://jenkins.mycompany.com \
            foxylion/jenkins-slave
 ```
 
