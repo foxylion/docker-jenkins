@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y git make curl
 RUN apt-get update && apt-get install -y apt-transport-https ca-certificates software-properties-common
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-RUN apt-get update && apt-get install -y docker-ce
+RUN apt-get update && apt-get install -y docker-ce=18.03.1~ce-0~ubuntu
 
 RUN mkdir -p /root/.ssh
 RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
