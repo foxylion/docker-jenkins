@@ -20,7 +20,11 @@ def clean_dir(dir):
 
 def slave_create(node_name, working_dir, executors, labels):
     j = Jenkins(os.environ['JENKINS_URL'], os.environ['JENKINS_USER'], os.environ['JENKINS_PASS'])
-    j.node_create(node_name, working_dir, num_executors = int(executors), labels = labels, launcher = NodeLaunchMethod.JNLP)
+    launcher_params = {}
+    if os.environ['SLAVE_WEBSOCKET'] == 'true':
+        launcher_params = { "webSocket": True }
+    j.node_create(node_name, working_dir, num_executors = int(executors), labels = labels, 
+                  launcher = NodeLaunchMethod.JNLP, launcher_params = launcher_params)
 
 def slave_delete(node_name):
     j = Jenkins(os.environ['JENKINS_URL'], os.environ['JENKINS_USER'], os.environ['JENKINS_PASS'])
@@ -31,7 +35,7 @@ def slave_download(target):
         os.remove(slave_jar)
 
     loader = urllib.URLopener()
-    loader.retrieve(os.environ['JENKINS_URL'] + '/jnlpJars/slave.jar', '/var/lib/jenkins/slave.jar')
+    loader.retrieve(os.environ['JENKINS_URL'] + '/jnlpJars/agent.jar', slave_jar)
 
 def slave_run(slave_jar, jnlp_url):
     params = [ 'java', '-jar', slave_jar, '-jnlpUrl', jnlp_url ]
@@ -39,7 +43,8 @@ def slave_run(slave_jar, jnlp_url):
         params.extend([ '-connectTo', os.environ['JENKINS_SLAVE_ADDRESS' ] ])
 
     if os.environ['SLAVE_SECRET'] == '':
-        params.extend([ '-jnlpCredentials', os.environ['JENKINS_USER'] + ':' + os.environ['JENKINS_PASS'] ])
+        if os.environ['SLAVE_WEBSOCKET'] != 'true':
+            params.extend([ '-jnlpCredentials', os.environ['JENKINS_USER'] + ':' + os.environ['JENKINS_PASS'] ])
     else:
         params.extend([ '-secret', os.environ['SLAVE_SECRET'] ])
     return subprocess.Popen(params, stdout=subprocess.PIPE)
