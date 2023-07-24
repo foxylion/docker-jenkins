@@ -115,6 +115,7 @@ There are some environment variables to customize the slave behavior.
 | `SLAVE_EXECUTORS` | Defines how many executors the slave should provide. | `1` |
 | `SLAVE_LABELS`| Defines which labels the slave should have. Separete them using a space. | `docker` |
 | `SLAVE_WORING_DIR`| Define a custom working directory when it is not possible to use `-w` at `docker run` command. | `-` |
+| `SLAVE_WEBSOCKET`| When set to `true` the slave will connect using websockets over the main jenkins url | `false` |
 | `CLEAN_WORKING_DIR` | When set to `true` the slave will clean the working directory on startup. This can help to prevent failed builds due to stored configuration in the working directory. | `true` |
 
 #### Temporary Slaves
